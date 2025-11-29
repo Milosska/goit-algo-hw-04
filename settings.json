@@ -1,0 +1,10 @@
+{
+  "python.pythonPath": ".venv/Scripts/python.exe",
+  "python.linting.enabled": true,
+  "python.linting.ruffEnabled": true,
+  "python.linting.ruffPath": ".venv/Scripts/ruff",
+  "editor.formatOnSave": true,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  }
+}
