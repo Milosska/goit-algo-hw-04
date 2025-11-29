@@ -1,5 +1,9 @@
+import sys
 from src.constants import Command
-from src.helpers import parse_input
+from src.helpers import parse_input, compare_sorting_algorithms
+
+# Increase recursion limit fro being able to sort 1000 elem arrays
+sys.setrecursionlimit(1100)
 
 
 def main():
@@ -22,7 +26,7 @@ def main():
                 break
 
             case Command.COMPARISON:
-                print("Comparison implementation")
+                compare_sorting_algorithms()
                 break
 
             case Command.MERGE:
