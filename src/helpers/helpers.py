@@ -1,24 +1,7 @@
 import timeit
-import math
 from typing import Callable
-from src.decorators.decorators import handle_errors
-from src.constants import Command
-from src.benchmarks import (
-    generate_random_numbers_in_range,
-    generate_uniquie_numbers_in_range,
-)
 
-from src.algorithms import merge_sort, insertion_sort
-
-
-@handle_errors
-def parse_input(user_input: str) -> Command:
-    if user_input is None:
-        raise ValueError("Invalid command. Please, use one of the listed below.")
-
-    normalized_input = user_input.strip().lower()
-    command = Command(normalized_input)
-    return command
+from src.algorithms import merge_sort, insertion_sort, merge
 
 
 def measure_sort_time(
@@ -62,17 +45,13 @@ def run_all_scenarios_for_array(array: list[int], type: str) -> None:
         compare_algorithms_for_array(arr)
 
 
-@handle_errors
-def compare_sorting_algorithms() -> None:
-    print("Starting sorting algorithms comparison.")
+def merge_k_lists(lists_to_sort: list[list[int]], i=0) -> list[int]:
+    print(f"Sorting lists: {lists_to_sort}")
 
-    for pow in range(1, 4):
-        elements_num = int(math.pow(10, pow))
+    if len(lists_to_sort) == 1:
+        return lists_to_sort[0]
 
-        numbers_in_range = generate_random_numbers_in_range(elements_num)
-        run_all_scenarios_for_array(numbers_in_range, "repetable")
-
-        unique_numbers_in_range = generate_uniquie_numbers_in_range(elements_num)
-        run_all_scenarios_for_array(unique_numbers_in_range, "unique")
-
-    print("Comparison is finished succssfuly.")
+    mid = len(lists_to_sort) // 2
+    left = merge_k_lists(lists_to_sort[:mid])
+    right = merge_k_lists(lists_to_sort[mid:])
+    return merge(left, right)
